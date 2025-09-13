@@ -1,0 +1,18 @@
+on: [workflow_dispatch]
+
+jobs:
+  sync-to-HF:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Add remote
+        env:
+          HF: ${{ secrets.HF }}
+        run: git remote add space https://motezuki:$HF@huggingface.co/spaces/motezuki/image2stl
+        
+      - name: Push to HF
+        env:
+          HF: ${{ secrets.HF }}
+        run: git push https://motezuki:$HF@huggingface.co/spaces/motezuki/image2stl main
+      
